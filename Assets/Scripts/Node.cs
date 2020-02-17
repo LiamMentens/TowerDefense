@@ -23,6 +23,7 @@ public class Node : MonoBehaviour
 
     void OnMouseDown()
     {
+
         if (EventSystem.current.IsPointerOverGameObject())
         {
             return;
@@ -40,7 +41,7 @@ public class Node : MonoBehaviour
         }
 
         //Build turret
-        GameObject turretToBuild = BuildManager.instance.GetTurretToBuild();
+        GameObject turretToBuild = buildManager.GetTurretToBuild();
         turret = (GameObject)Instantiate(turretToBuild, transform.position + positionOffset, transform.rotation);
 
     }
