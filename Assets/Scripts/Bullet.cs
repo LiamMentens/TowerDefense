@@ -8,6 +8,7 @@ public class Bullet : MonoBehaviour
 
     public float speed = 70f;
     public GameObject impactEffect;
+    public float explosionRadius = 0f;
 
     public void Seek(Transform _target)
     {
@@ -33,17 +34,49 @@ public class Bullet : MonoBehaviour
         }
 
         transform.Translate(dir.normalized * distanceThisFrame, Space.World);
-
+        transform.LookAt(target);
 
     }
+
+    
 
     void HitTarget()
     {
         GameObject effectIns = (GameObject)Instantiate(impactEffect, transform.position, transform.rotation);
         Debug.Log("Dood jonge");
-        Destroy(effectIns, 2f);
-        Destroy(target.gameObject);
+        Destroy(effectIns, 5f);
+
+        if(explosionRadius > 0f)
+        {
+            Explode();
+        }
+        else
+        {
+            Damage(target);
+        }
+        
         Destroy(gameObject);
+    }
+    
+    void Explode()
+    {
+        Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
+        foreach (Collider collider in colliders)
+        {
+            if (collider.tag == "Enemy")
+            {
+                Damage(collider.transform);
+            }
+        }
+    }
+    void Damage(Transform enemy)
+    {
+        Destroy(enemy.gameObject);
+    }
+    void OnDrawGizmoSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, explosionRadius);
     }
 
 }
