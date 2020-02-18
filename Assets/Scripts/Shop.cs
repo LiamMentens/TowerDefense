@@ -21,7 +21,7 @@ public class Shop : MonoBehaviour
 
     public void SelectMissileLauncher()
     {
-        Debug.Log("MissileLauncher Selected");
+        Debug.Log("MissileLauncher Selected"); 
         buildManager.SelectTurretToBuild(missileLauncher);
     }
 }

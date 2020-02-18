@@ -5,10 +5,11 @@ using UnityEngine.EventSystems;
 public class Node : MonoBehaviour
 {
     public Color hoverColor;
+    public Vector3 positionOffset;
+
 
     [Header("Optional")]
     public GameObject turret;
-    public Vector3 positionOffset;
 
     private Renderer rend;
     private Color startColor;
@@ -37,7 +38,7 @@ public class Node : MonoBehaviour
             return;
         } 
 
-        if (buildManager.CanBuild)
+        if (!buildManager.CanBuild)
         {
             return;
         }
@@ -59,7 +60,7 @@ public class Node : MonoBehaviour
             return;
         }
 
-        if (buildManager.CanBuild)
+        if (!buildManager.CanBuild)
         {
             return;
         }
