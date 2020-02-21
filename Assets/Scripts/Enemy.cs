@@ -1,24 +1,36 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
     public float speed = 10f;
 
+
+
     private Transform target;
     private int wavepointIndex = 0;
 
-    public int health = 100;
+    public float startHealth = 100;
+    public float health;
     public int value = 50;
+
+    [Header("Unity stuff")]
+    public Image healthBar;
 
     public GameObject deathEffect;
     void Start()
     {
         target = Waypoints.points[0];
+
+      
+        health = startHealth;
     }
 
     public void TakeDamage(int amount)
     {
         health -= amount;
+        healthBar.fillAmount = health / startHealth;
+
         if(health <= 0)
         {
             Die();
