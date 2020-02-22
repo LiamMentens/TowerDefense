@@ -15,6 +15,8 @@ public class WaveSpawner : MonoBehaviour
     public Text waveCountdownText;
 
     private int waveIndex = 0;
+
+    public GameManager gameManager;
     private void Update()
     {
         if(EnemiesAlive > 0)
@@ -41,7 +43,10 @@ public class WaveSpawner : MonoBehaviour
         Debug.Log("Incoming wave");
         PlayerStats.Rounds++;
 
+
         Wave wave = waves[waveIndex];
+
+        EnemiesAlive = wave.count;
         for (int i = 0; i < wave.count; i++)
         {
 
@@ -52,7 +57,7 @@ public class WaveSpawner : MonoBehaviour
         waveIndex++;
         if (waveIndex == waves.Length)
         {
-            Debug.Log("Victory!");
+            gameManager.WinLevel();
             this.enabled = false;
         }
     }

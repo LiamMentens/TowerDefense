@@ -1,11 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public static bool gameIsOver;
     public GameObject gameOverUI;
+    public string nextLevel = "Level2";
+    public int levelToUnlock = 2;
+    
     void Start()
     {
         gameIsOver = false;
@@ -33,5 +37,12 @@ public class GameManager : MonoBehaviour
 
         gameOverUI.SetActive(true);
         Debug.Log("U ded");
+    }
+
+    public void WinLevel()
+    {
+        Debug.Log("Victory!");
+        PlayerPrefs.SetInt("levelReached",levelToUnlock);
+        SceneManager.LoadScene(nextLevel);
     }
 }
