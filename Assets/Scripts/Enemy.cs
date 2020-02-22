@@ -10,10 +10,10 @@ public class Enemy : MonoBehaviour
     private Transform target;
     private int wavepointIndex = 0;
 
-    public float startHealth = 100;
+    public float startHealth;
     public float health;
     public int value = 50;
-
+    
     [Header("Unity stuff")]
     public Image healthBar;
 
@@ -44,7 +44,11 @@ public class Enemy : MonoBehaviour
 
         GameObject effect = (GameObject)Instantiate(deathEffect, transform.position, Quaternion.identity);
         Destroy(effect, 5f);
+
+        WaveSpawner.EnemiesAlive--;
+
         Destroy(gameObject);
+
     }
 
     void Update()
@@ -73,6 +77,7 @@ public class Enemy : MonoBehaviour
     void EndPath()
     {
         PlayerStats.Lives--;
+        WaveSpawner.EnemiesAlive--;
         Destroy(gameObject);
 
     }
