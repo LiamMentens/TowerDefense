@@ -22,6 +22,11 @@ public class WaveSpawner : MonoBehaviour
         if(EnemiesAlive > 0)
         {
             return;
+        } 
+        if(waveIndex == waves.Length)
+        {
+            gameManager.WinLevel();
+            this.enabled = false;
         }
         if (countdown <= 0f)
         {
